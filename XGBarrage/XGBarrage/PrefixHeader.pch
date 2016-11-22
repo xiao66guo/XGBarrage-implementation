@@ -1,0 +1,42 @@
+//
+//  PrefixHeader.pch
+//  XGBarrage
+//
+//  Created by 小果 on 16/10/1.
+//  Copyright © 2016年 小果. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "NSString+Extension.h"
+#import "UIImageView+WebCache.h"
+#import "UIView+Extension.h"
+#import "UIImage+Extension.h"
+#import "MJExtension.h"
+#import "NSString+Path.h"
+
+#define ScreenW [UIScreen mainScreen].bounds.size.width
+#define ScreenH [UIScreen mainScreen].bounds.size.height
+// 是否为iOS7
+#define iOS7 ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0)
+#define XGRecentFilepath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"recent_emotions.data"]
+
+// 表情相关
+// 每页表情的最大行数
+#define XGEmotionMaxRows 3
+// 每页表情的最大列数
+#define XGEmotionMaxCols 7
+// 每页表情的最大总个数
+#define XGEmotionMaxCountPage (XGEmotionMaxRows * XGEmotionMaxCols - 1)
+
+
+// 通知
+// 表情选中的通知
+#define XGEmotionDidSelectedNotification @"XGEmotionDidSelectedNotification"
+// 点击删除按钮的通知
+#define XGEmotionDedDeleteNotification @"XGEmotionDedDeleteNotification"
+// 通知里面取出表情用的key
+#define XGSelectedEmotion @"XGSelectedEmotion"
+
+#endif /* PrefixHeader_pch */
