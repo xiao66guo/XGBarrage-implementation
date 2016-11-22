@@ -14,6 +14,7 @@
 
 
 在控制器中加载弹幕的方法:
+
 -(void)loadBarrageViewSource{
 
     NSInteger arcIndex = arc4random_uniform((u_int32_t)_barrageArray.count);
