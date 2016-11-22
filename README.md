@@ -17,10 +17,8 @@
 
 -(void)loadBarrageViewSource{
 
--(void)loadBarrageViewSource{
     NSInteger arcIndex = arc4random_uniform((u_int32_t)_barrageArray.count);
     XGBarrageModel *barrage = _barrageArray[arcIndex];
-
     XGImage *image = [XGBarrageView xg_imageWithBarrage:barrage];
     image.imageX = self.view.bounds.size.width;
     image.imageY = arc4random_uniform(_barrageView.bounds.size.height - image.size.height);
@@ -30,7 +28,6 @@
     rect.origin.x = image.imageX;
     rect.origin.y = image.imageY;
     imageView.frame = rect;
-    
     [_barrageView addSubview:imageView];
     
     CABasicAnimation *anim = [[CABasicAnimation alloc] init];
@@ -38,8 +35,8 @@
     anim.toValue = @(-image.imageX);
     anim.duration = XGAnimationDuration;
     [imageView.layer addAnimation:anim forKey:@"animKey"];
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(XGAnimationDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [imageView removeFromSuperview];
     });
     }
+    
