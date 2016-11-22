@@ -17,6 +17,7 @@
 
 -(void)loadBarrageViewSource{
 
+-(void)loadBarrageViewSource{
     NSInteger arcIndex = arc4random_uniform((u_int32_t)_barrageArray.count);
     XGBarrageModel *barrage = _barrageArray[arcIndex];
 
