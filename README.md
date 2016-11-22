@@ -23,7 +23,7 @@
     XGImage *image = [XGBarrageView xg_imageWithBarrage:barrage];
     
     image.imageX = self.view.bounds.size.width;
-    
+
     image.imageY = arc4random_uniform(_barrageView.bounds.size.height - image.size.height);
  
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
