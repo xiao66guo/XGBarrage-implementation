@@ -15,7 +15,7 @@
 
 在控制器中加载弹幕的方法：
 
--(void)loadBarrageViewSource {
+-(void)loadBarrageViewSource 
     NSInteger arcIndex = arc4random_uniform((u_int32_t)_barrageArray.count);
     
     XGBarrageModel *barrage = _barrageArray[arcIndex];
@@ -41,4 +41,4 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(XGAnimationDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [imageView removeFromSuperview];
     });
-}
+
