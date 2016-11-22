@@ -12,9 +12,7 @@
 
 5️⃣通过输入的弹幕的内容来实现“发送”按钮是否为可用；
 
-
-在控制器中加载弹幕的方法:
-   -(void)loadBarrageViewSource{
+-(void)loadBarrageViewSource{
     NSInteger arcIndex = arc4random_uniform((u_int32_t)_barrageArray.count);
     XGBarrageModel *barrage = _barrageArray[arcIndex];
 
