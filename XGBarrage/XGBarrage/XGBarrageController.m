@@ -42,14 +42,14 @@
     [self createBarrageWithBottomToolbar];
     
     // 键盘即将显示，就会发出UIKeyboardWillShowNotification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xg_keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     // 键盘即将隐藏，就会发出UIKeyboardWillHideNotification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xg_keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     // 监听表情的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidSelected:) name:XGEmotionDidSelectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xg_emotionDidSelected:) name:XGEmotionDidSelectedNotification object:nil];
     // 监听删除按钮点击的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidDeleted:) name:XGEmotionDedDeleteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xg_emotionDidDeleted:) name:XGEmotionDedDeleteNotification object:nil];
 }
 
 #pragma mark - 设置弹幕内容
@@ -160,14 +160,14 @@
     [_send setTitle:@"发送" forState:UIControlStateNormal];
     [_send setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_send.titleLabel sizeToFit];
-    [_send addTarget:self action:@selector(sendWithBarrageContent) forControlEvents:UIControlEventTouchUpInside];
+    [_send addTarget:self action:@selector(xg_sendWithBarrageContent) forControlEvents:UIControlEventTouchUpInside];
     [_toolView addSubview:_send];
 
     // 表情按钮
     _emotionBtn = [[UIButton alloc] initWithFrame:CGRectMake(_send.x - 44, 0, 44, 44)];
     [_emotionBtn setImage:[UIImage imageNamed:@"chat_bottom_smile_nor"] forState:UIControlStateNormal];
     [_emotionBtn.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_emotionBtn addTarget:self action:@selector(openemotionKeyboard) forControlEvents:UIControlEventTouchUpInside];
+    [_emotionBtn addTarget:self action:@selector(xg_openEmotionKeyboard) forControlEvents:UIControlEventTouchUpInside];
     [_toolView addSubview:_emotionBtn];
     
     _textView = [[XGEmotionTextView alloc] initWithFrame:CGRectMake(5, 5, ScreenW - _emotionBtn.width - _send.width - 10, 34)];
@@ -181,7 +181,7 @@
 }
 
 #pragma mark - 键盘即将隐藏的方法
--(void)keyboardWillHide:(NSNotification *)noti
+-(void)xg_keyboardWillHide:(NSNotification *)noti
 {
     if (_isChangingKeyboard){
         _isChangingKeyboard = NO;
@@ -197,7 +197,7 @@
 }
 
 #pragma mark - 键盘即将弹出的方法
--(void)keyboardWillShow:(NSNotification *)noti
+-(void)xg_keyboardWillShow:(NSNotification *)noti
 {
     // 1、键盘弹出时需要的时间
     CGFloat duration = [noti.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
@@ -224,7 +224,7 @@
 }
 
 #pragma mark - 点击表情按钮时打开键盘的方法
--(void)openemotionKeyboard{
+-(void)xg_openEmotionKeyboard{
     _isChangingKeyboard = YES;
     
     if (_textView.inputView) { // 当前显示的是自定义键盘，切换为系统自带的键盘
@@ -247,7 +247,7 @@
 }
 
 #pragma mark - 选中表情时的方法
--(void)emotionDidSelected:(NSNotification *)noti{
+-(void)xg_emotionDidSelected:(NSNotification *)noti{
     XGEmotion *emotion = noti.userInfo[XGSelectedEmotion];
     
     // 拼接表情
@@ -256,7 +256,7 @@
 }
 
 #pragma mark - 删除表情的方法
--(void)emotionDidDeleted:(NSNotification *)noti{
+-(void)xg_emotionDidDeleted:(NSNotification *)noti{
     [_textView deleteBackward];
 }
 
@@ -267,16 +267,10 @@
 }
 
 #pragma mark - 点击发送按钮执行的方法
--(void)sendWithBarrageContent{
+-(void)xg_sendWithBarrageContent{
     _send.backgroundColor = [UIColor lightGrayColor];
     _send.enabled = NO;
-    
-//    NSArray *valueArr = [NSArray arrayWithObjects:@"9.jpg",@"xiao66guo",_textView.realText,@"1", nil];
-//    NSArray *keyArr = [NSArray arrayWithObjects:@"icon",@"userName",@"content",@"type", nil];
-//    NSDictionary *dict = [NSDictionary dictionaryWithObjects:valueArr forKeys:keyArr];
-//    [_barrageArray insertObject:dict atIndex:0];
-//    NSLog(@"%zd",_barrageArray.count);
-    
+        
     // 让textView失去第一响应
     [_textView resignFirstResponder];
     _textView.text = nil;
