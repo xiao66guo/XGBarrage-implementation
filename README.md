@@ -48,10 +48,11 @@
     });
     }
   ```
+  
 绘制弹幕内容的部分代码：
-```
-+(XGImage *)xg_imageWithBarrage:(XGBarrageModel *)barrage{
-     
+
+ ```
++(XGImage *)xg_imageWithBarrage:(XGBarrageModel *)barrage{  
     CGFloat marginX = 5;
     CGFloat expressionW = XGBarrageExpressionW;
     CGFloat expressionH = expressionW;
